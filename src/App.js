@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import ReactFlow, {
+  MiniMap,
+  Controls,
+  Background,
+  useNodesState,
+  useEdgesState,
+} from 'reactflow';
 
-function App() {
+import DateTimePicker from './components/DateTimePicker';
+
+import { nodes as initialNodes, edges as initialEdges } from './data/binance';
+
+import 'reactflow/dist/style.css';
+import './index.css';
+
+const onInit = (instance) => {
+  instance.zoomTo(0.9)
+}
+
+const App = () => {
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
+  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <div style={{ position: 'absolute', left: '20px', top: '20px', zIndex: '2' }}><DateTimePicker /></div>
+      <div style={{ height: '100vh' }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          nodesDraggable={false}
+          onInit={onInit}
+          fitView
         >
-          Learn React
-        </a>
-      </header>
+          <MiniMap zoomable pannable />
+          <Controls showInteractive={false} />
+          <Background color="#aaa" gap={16} />
+        </ReactFlow>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
