@@ -11,7 +11,30 @@ const disabledDate = (current) => {
   return current > dayjs().endOf('day');
 };
 
-const DateTimePicker = () => (
+const timePresets = [
+  {
+    label: 'Last 1 hours',
+    value: [dayjs().add(-1, 'h'), dayjs()],
+  },
+  {
+    label: 'Yesterday',
+    value: [dayjs().add(-1, 'd'), dayjs()],
+  },
+  {
+    label: 'Last 7 days',
+    value: [dayjs().add(-7, 'd'), dayjs()],
+  },
+  {
+    label: 'Last 30 days',
+    value: [dayjs().add(-30, 'd'), dayjs()],
+  },
+  {
+    label: 'Last 90 days',
+    value: [dayjs().add(-90, 'd'), dayjs()],
+  },
+];
+
+const DateTimePicker = ({ set }) => (
   <Space direction="vertical" size={12}>
     <RangePicker
       disabledDate={disabledDate}
@@ -21,6 +44,7 @@ const DateTimePicker = () => (
         defaultValue: [dayjs('00:00', 'HH:mm'), dayjs('11:59', 'HH:mm')],
       }}
       format="HH:mm DD-MM-YYYY"
+      presets={timePresets}
     />
   </Space>
 );
