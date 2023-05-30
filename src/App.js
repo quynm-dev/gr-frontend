@@ -6,6 +6,7 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
 } from 'reactflow';
+import { Empty } from 'antd'
 
 import Node from './components/node/Node';
 import Edge from './components/edge/Edge';
@@ -291,30 +292,49 @@ const App = () => {
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+  const [filterExchange, setFilterExchange] = useState("binance")
+  const [filterToken, setFilterToken] = useState("btc")
+  const [filterStartTime, setFilterStartTime] = useState("start time")
+  const [filterEndTime, setFilterEndTime] = useState("end time")
 
   return (
     <div>
-      <div style={{ right: '20px', top: '20px', zIndex: '2', position: 'absolute' }}><DateTimePicker /></div>
-      <div style={{ right: '650px', top: '20px', zIndex: '2', position: 'absolute' }}><Select data={exchanges} /></div>
-      <div style={{ right: '400px', top: '20px', zIndex: '2', position: 'absolute' }}><Select data={tokens} /></div>
-      <SideDrawer sideDrawerOpen={sideDrawerOpen} onCloseSideDrawer={onCloseSideDrawer} data={sideDrawerData} />
-      <div style={{ height: '100vh' }}>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          edgeTypes={edgeTypes}
-          nodeTypes={nodeTypes}
-          nodesDraggable={true}
-          onInit={onInit}
-          fitView
-        >
-          <MiniMap zoomable pannable />
-          <Controls showInteractive={false} />
-          <Background color="#aaa" gap={16} />
-        </ReactFlow>
+      <div style={{ right: '20px', top: '20px', zIndex: '2', position: 'absolute' }}>
+        <DateTimePicker setFilterStartTime={setFilterStartTime} setFilterEndTime={setFilterEndTime} />
       </div>
+      <div style={{ right: '650px', top: '20px', zIndex: '2', position: 'absolute' }}>
+        <Select data={exchanges} setFilterExchange={setFilterExchange} />
+      </div>
+      <div style={{ right: '400px', top: '20px', zIndex: '2', position: 'absolute' }}>
+        <Select data={tokens} setFilterToken={setFilterToken} />
+      </div>
+      {
+        filterExchange && filterToken && filterStartTime && filterEndTime ?
+          <div>
+            <SideDrawer sideDrawerOpen={sideDrawerOpen} onCloseSideDrawer={onCloseSideDrawer} data={sideDrawerData} />
+            <div style={{ height: '100vh' }}>
+              <ReactFlow
+                nodes={nodes}
+                edges={edges}
+                onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
+                edgeTypes={edgeTypes}
+                nodeTypes={nodeTypes}
+                nodesDraggable={true}
+                onInit={onInit}
+                fitView
+              >
+                <MiniMap zoomable pannable />
+                <Controls showInteractive={false} />
+                <Background color="#aaa" gap={16} />
+              </ReactFlow>
+            </div>
+          </div>
+          :
+          <div style={{ display: 'flex', alignItems: 'center', height: '100vh', justifyContent: 'center' }}>
+            <Empty description={false} />
+          </div>
+      }
     </div>
   );
 };
