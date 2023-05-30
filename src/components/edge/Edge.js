@@ -4,6 +4,7 @@ import {
   EdgeLabelRenderer,
   getBezierPath
 } from "reactflow";
+import { RiMoneyCnyCircleFill } from "react-icons/ri";
 
 const Edge = ({
   sourceX,
@@ -30,24 +31,41 @@ const Edge = ({
       <EdgeLabelRenderer>
         <div
           style={{
+            position: 'absolute',
+            fontSize: '10px',
             transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
             pointerEvents: "all"
           }}
-          className="nodrag nopan absolute text-xs"
+          className="nodrag nopan"
           onClick={data.onClick}
         >
-          <div className="flex items-center">
-            <div className="p-1.5">
-              {data.value}
-            </div>
-            <div className="flex items-center justify-center w-8">
-              <img
-                src={data.src}
-                alt={data.alt}
-                className="w-fit"
-              />
-            </div>
-          </div>
+          {
+            !data.isComposite ?
+              (
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ padding: '5px' }}>
+                    {data.value}
+                  </div>
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: '30px'
+                  }}>
+                    <img
+                      src={data.src}
+                      alt={data.alt}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                </div>
+              ) :
+              (
+                <div style={{ fontSize: '50px' }}>
+                  <RiMoneyCnyCircleFill />
+                </div>
+              )
+          }
         </div>
       </EdgeLabelRenderer>
     </>
