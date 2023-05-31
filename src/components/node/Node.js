@@ -3,26 +3,26 @@ import { Handle, Position } from 'reactflow';
 import { FaWallet } from "react-icons/fa";
 
 export default memo(({ data, isConnectable }) => {
-  const attributes = {
+  const typeAttributes = {
     ...(data.isInput ? { position: Position.Bottom, type: "source" } : { position: Position.Top, type: "target" })
   }
 
   return (
     <div style={{
-      backgroundColor: 'red',
       width: '150px',
       display: 'flex',
       justifyContent: 'center',
       padding: '10px',
       border: '1px solid #1a192b',
       borderRadius: '3px',
-      color: 'white'
+      color: 'white',
+      backgroundColor: data.isInput ? 'green' : 'red'
     }}
       onClick={data.onClick}
     >
       <Handle
         isConnectable={isConnectable}
-        {...attributes}
+        {...typeAttributes}
       />
       <div>
         {
