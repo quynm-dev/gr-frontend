@@ -225,9 +225,45 @@ const App = () => {
 
   const exchanges = [
     {
-      src: "https://assets.coingecko.com/markets/images/469/small/Binance.png?1568875842",
-      alt: "exchange-image",
-      name: "Binance",
+      src: "https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png?1621471875",
+      alt: "coinbase-image",
+      name: "Coinbase",
+      type: "Exchange"
+    },
+    {
+      src: "https://assets.coingecko.com/markets/images/698/small/bybit_spot.png?1629971794",
+      alt: "bybit-image",
+      name: "Bybit",
+      type: "Exchange"
+    },
+    {
+      src: "https://assets.coingecko.com/markets/images/96/small/WeChat_Image_20220117220452.png?1642428377",
+      alt: "okx-image",
+      name: "OKX",
+      type: "Exchange"
+    },
+    {
+      src: "https://assets.coingecko.com/markets/images/589/small/h2oMjPp6_400x400.jpg?1669699705",
+      alt: "crypto.com-image",
+      name: "Crypto.com",
+      type: "Exchange"
+    },
+    {
+      src: "https://assets.coingecko.com/markets/images/4/small/BItfinex.png?1615895883",
+      alt: "bitfinex-image",
+      name: "Bitfinex",
+      type: "Exchange"
+    },
+    {
+      src: "https://assets.coingecko.com/markets/images/409/small/MEXC_logo_square.jpeg?1673000123",
+      alt: "mecx-global-image",
+      name: "MEXC Global",
+      type: "Exchange"
+    },
+    {
+      src: "https://assets.coingecko.com/markets/images/540/small/Bitget_new_logo_2.png?1630049618",
+      alt: "bitget-image",
+      name: "Bitget",
       type: "Exchange"
     },
     {
@@ -236,56 +272,158 @@ const App = () => {
       name: "Huobi",
       type: "Exchange"
     },
+    {
+      src: "https://assets.coingecko.com/markets/images/29/small/kraken.jpg?1584251255",
+      alt: "kraken-image",
+      name: "Kraken",
+      type: "Exchange"
+    },
+    {
+      src: "https://assets.coingecko.com/markets/images/812/small/YtFwQwJr_400x400.jpg?1646056092",
+      alt: "bingx-image",
+      name: "Bingx",
+      type: "Exchange"
+    },
   ]
   const sideDrawerData = [
     {
-      address: "0x685b1ded8013785d6623cc18d214320b6bb64759",
-      scanURL: "https://bscscan.com/address/0x685b1ded8013785d6623cc18d214320b6bb64759",
+      address: "0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
+      scanURL: "https://bscscan.com/address/0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
       transactions: [
         {
-          src: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-          alt: "token-image",
-          scanURL: "https://bscscan.com/tx/0xc63da88a098c69000f032c5dca04d8851bb0895c3be6eb9680ed9c1aabbc3b3b",
-          from: "0x685b1ded8013785d6623cc18d214320b6bb64759",
+          src: "https://assets.coingecko.com/coins/images/825/thumb/bnb-icon2_2x.png?1644979850",
+          alt: "bnb-image",
+          scanURL: "https://bscscan.com/tx/0x4eb4d57ff1bc134fe8e4046bde8c82513d41acb4a183e244bdcd4b1fa6206046",
+          from: "0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
           to: "",
-          value: 12
+          value: 120
         },
         {
-          src: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-          alt: "token-image",
-          scanURL: "https://bscscan.com/tx/0xc63da88a098c69000f032c5dca04d8851bb0895c3be6eb9680ed9c1aabbc3b3b",
-          from: "",
+          src: "https://assets.coingecko.com/coins/images/13442/thumb/steth_logo.png?1608607546",
+          alt: "steth-image",
+          scanURL: "https://bscscan.com/tx/0x4eb4d57ff1bc134fe8e4046bde8c82513d41acb4a183e244bdcd4b1fa6206046",
+          from: "0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
           to: "",
-          value: 50
-        }
+          value: 0.1
+        },
       ]
     },
     {
-      address: "0x5BCb97ABD43C891b5e202e5A10e638f18EBAF000",
-      scanURL: "https://bscscan.com/address/0x5BCb97ABD43C891b5e202e5A10e638f18EBAF000",
+      address: "0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
+      scanURL: "https://bscscan.com/address/0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
       transactions: [
         {
-          src: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-          alt: "token-image",
-          from: "0x5BCb97ABD43C891b5e202e5A10e638f18EBAF000",
-          to: "",
+          src: "https://assets.coingecko.com/coins/images/2/thumb/litecoin.png?1547033580",
+          alt: "ltc-image",
+          scanURL: "https://bscscan.com/tx/0x4eb4d57ff1bc134fe8e4046bde8c82513d41acb4a183e244bdcd4b1fa6206046",
+          from: "",
+          to: "0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
+          value: 50
+        },
+        {
+          src: "https://assets.coingecko.com/coins/images/44/thumb/xrp-symbol-white-128.png?1605778731",
+          alt: "xrp-image",
+          scanURL: "https://bscscan.com/tx/0x4eb4d57ff1bc134fe8e4046bde8c82513d41acb4a183e244bdcd4b1fa6206046",
+          from: "",
+          to: "0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
           value: 1000
         },
         {
-          src: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-          alt: "token-image",
-          from: "0x5BCb97ABD43C891b5e202e5A10e638f18EBAF000",
-          to: "",
-          value: 50
-        }
+          src: "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912",
+          alt: "matic-image",
+          scanURL: "https://bscscan.com/tx/0x4eb4d57ff1bc134fe8e4046bde8c82513d41acb4a183e244bdcd4b1fa6206046",
+          from: "",
+          to: "0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
+          value: 5012.2
+        },
+        {
+          src: "https://assets.coingecko.com/coins/images/12171/thumb/polkadot.png?1639712644",
+          alt: "dot-image",
+          scanURL: "https://bscscan.com/tx/0x4eb4d57ff1bc134fe8e4046bde8c82513d41acb4a183e244bdcd4b1fa6206046",
+          from: "",
+          to: "0x8b6c8fd93d6f4cea42bbb345dbc6f0dfdb5bec73",
+          value: 1000
+        },
       ]
     },
   ]
   const tokens = [
     {
       src: "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
-      alt: "token-image",
+      alt: "btc-image",
       name: "BTC",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/279/thumb/ethereum.png?1595348880",
+      alt: "eth-image",
+      name: "ETH",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/325/thumb/Tether.png?1668148663",
+      alt: "usdt-image",
+      name: "USDT",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/825/thumb/bnb-icon2_2x.png?1644979850",
+      alt: "bnb-image",
+      name: "BNB",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/6319/thumb/USD_Coin_icon.png?1547042389",
+      alt: "usdc-image",
+      name: "USDC",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/44/thumb/xrp-symbol-white-128.png?1605778731",
+      alt: "xrp-image",
+      name: "XRP",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/975/thumb/cardano.png?1547034860",
+      alt: "steth-image",
+      name: "STETH",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/5/thumb/dogecoin.png?1547792256",
+      alt: "doge-image",
+      name: "DOGE",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912",
+      alt: "matic-image",
+      name: "MATIC",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/4128/thumb/solana.png?1640133422",
+      alt: "sol-image",
+      name: "SOL",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/1094/thumb/tron-logo.png?1547035066",
+      alt: "trx-image",
+      name: "TRX",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/12171/thumb/polkadot.png?1639712644",
+      alt: "dot-image",
+      name: "dot",
+      type: "Token"
+    },
+    {
+      src: "https://assets.coingecko.com/coins/images/2/thumb/litecoin.png?1547033580",
+      alt: "ltc-image",
+      name: "LTC",
       type: "Token"
     },
   ]

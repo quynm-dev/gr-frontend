@@ -8,7 +8,7 @@ const Transaction = ({ transaction, wallet }) => {
 
   return (
     < div onClick={() => window.open(transaction.scanURL, '_blank')} style={{ cursor: 'pointer' }}>
-      <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+      <Space direction="vertical" size="middle" style={{ width: '100%' }} className="transaction">
         <Badge.Ribbon {...attributes}>
           <Card size="small">
             <div style={{ display: 'flex', alignItems: 'center' }}>
