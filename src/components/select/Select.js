@@ -1,7 +1,7 @@
 import { Select } from 'antd';
 const { Option } = Select;
 
-const S = ({ data }) => {
+const S = ({ data, onChange }) => {
   return (
     <Select
       showSearch
@@ -12,6 +12,7 @@ const S = ({ data }) => {
       filterOption={(input, option) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
       }
+      onChange={onChange}
       allowClear
     >
       {

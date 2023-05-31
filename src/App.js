@@ -428,12 +428,37 @@ const App = () => {
     },
   ]
 
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+
   const [filterExchange, setFilterExchange] = useState("binance")
   const [filterToken, setFilterToken] = useState("btc")
   const [filterStartTime, setFilterStartTime] = useState("start time")
   const [filterEndTime, setFilterEndTime] = useState("end time")
+
+  const handleChangeExchange = (value) => {
+    let n = [...nodes]
+    let e = exchanges.filter((exchange) => {
+      return exchange.name === value
+    })
+
+    n.map((node) => {
+      if (node.id === '2') {
+        node.data = {
+          ...node.data,
+          label: (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+              <img src={e[0].src} alt="exchange-logo" />
+            </div>
+          ),
+        };
+      }
+
+      return node;
+    })
+
+    setNodes(n)
+  }
 
   return (
     <div>
@@ -441,7 +466,7 @@ const App = () => {
         <DateTimePicker setFilterStartTime={setFilterStartTime} setFilterEndTime={setFilterEndTime} />
       </div>
       <div style={{ right: '650px', top: '20px', zIndex: '2', position: 'absolute' }}>
-        <Select data={exchanges} setFilterExchange={setFilterExchange} />
+        <Select data={exchanges} setFilterExchange={setFilterExchange} onChange={handleChangeExchange} />
       </div>
       <div style={{ right: '400px', top: '20px', zIndex: '2', position: 'absolute' }}>
         <Select data={tokens} setFilterToken={setFilterToken} />
