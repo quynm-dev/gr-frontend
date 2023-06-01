@@ -17,14 +17,28 @@ import Select from './components/select/Select';
 import './styles/index.css'
 import 'reactflow/dist/style.css';
 
-const onInit = (instance) => {
-  instance.zoomTo(0.9)
-}
+const startInputXRight = 100
+const startInputXLeft = -100
+const startOutputXRight = 100
+const startOutputXLeft = -100
+const xEllipse = 1000
+const yEllipse = 500
+const range = 200
+let isInputRightTurn = true
+let isOutputLeftTurn = true
+let inputXRight = startInputXRight
+let inputXLeft = startInputXLeft
+let outputXRight = startOutputXRight
+let outputXLeft = startOutputXLeft
+
 const edgeTypes = {
   edge: Edge,
 };
 const nodeTypes = {
   node: Node,
+}
+const calculateYCoordinate = (x) => {
+  return -Math.sqrt(((1 - x * x / (xEllipse * xEllipse)) * yEllipse * yEllipse))
 }
 
 const App = () => {
@@ -35,194 +49,6 @@ const App = () => {
   const onCloseSideDrawer = () => {
     setSideDrawerOpen(false);
   };
-
-  const initialNodes = [
-    {
-      id: '1',
-      type: 'node',
-      data: {
-        label: '0x7efaef...',
-        onClick: () => onOpenSideDrawer(),
-        address: '0x7a1992f36b439045c3661d328db44e1407445daa40cb728516c614cca6949a65',
-        isComposite: false,
-        isInput: true,
-      },
-      position: { x: 0, y: -200 },
-    },
-    {
-      id: '2',
-      type: 'default',
-      data: {
-        label: (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
-            <img src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/270.png" alt="logo" />
-          </div>
-        ),
-      },
-      position: { x: 500, y: 0 },
-    },
-    {
-      id: '3',
-      type: 'node',
-      data: {
-        onClick: () => onOpenSideDrawer(),
-        label: '0x7a1992...',
-        address: '0x7a1992f36b439045c3661d328db44e1407445daa40cb728516c614cca6949a65',
-        isComposite: true,
-        isInput: false,
-      },
-      position: { x: 0, y: 200 },
-    },
-    {
-      id: '4',
-      type: 'node',
-      data: {
-        onClick: () => onOpenSideDrawer(),
-        label: '0x7a1992...',
-        address: '0x7a1992f36b439045c3661d328db44e1407445daa40cb728516c614cca6949a65',
-        isComposite: false,
-        isInput: true,
-      },
-      position: { x: 300, y: -200 },
-    },
-    {
-      id: '5',
-      type: 'node',
-      data: {
-        label: '0x179e3a...',
-        onClick: () => onOpenSideDrawer(),
-        address: '0x7a1992f36b439045c3661d328db44e1407445daa40cb728516c614cca6949a65',
-        isComposite: false,
-        isInput: true,
-      },
-      position: { x: 600, y: -200 },
-    },
-    {
-      id: '6',
-      type: 'node',
-      data: {
-        label: '0xbb4cdb...',
-        onClick: () => onOpenSideDrawer(),
-        address: '0x7a1992f36b439045c3661d328db44e1407445daa40cb728516c614cca6949a65',
-        isComposite: false,
-        isInput: true,
-      },
-      position: { x: 900, y: -200 },
-    },
-    {
-      id: '7',
-      type: 'node',
-      data: {
-        label: '0x5b1f87...',
-        onClick: () => onOpenSideDrawer(),
-        address: '0x7a1992f36b439045c3661d328db44e1407445daa40cb728516c614cca6949a65',
-        isComposite: false,
-        isInput: false,
-      },
-      position: { x: 300, y: 200 },
-    },
-    {
-      id: '8',
-      type: 'node',
-      data: {
-        label: '0x000000...',
-        onClick: () => onOpenSideDrawer(),
-        address: '0x7a1992f36b439045c3661d328db44e1407445daa40cb728516c614cca6949a65',
-        isComposite: false,
-        isInput: false,
-      },
-      position: { x: 600, y: 200 },
-    },
-    {
-      id: '9',
-      type: 'node',
-      data: {
-        label: '0xbb4cdb...',
-        onClick: () => onOpenSideDrawer(),
-        address: '0x7a1992f36b439045c3661d328db44e1407445daa40cb728516c614cca6949a65',
-        isComposite: false,
-        isInput: false,
-      },
-      position: { x: 900, y: 200 },
-    },
-  ];
-
-  const initialEdges = [
-    {
-      id: '1-2', source: '1', target: '2', animated: true, type: 'edge',
-      data: {
-        value: 12,
-        src: "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png",
-        alt: "token-image",
-        onClick: () => onOpenSideDrawer(),
-        isComposite: false,
-      }
-    },
-    {
-      id: '2-3', source: '2', target: '3', animated: true, type: 'edge',
-      data: {
-        value: 12,
-        src: "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png",
-        alt: "token-image",
-        onClick: () => onOpenSideDrawer(),
-        isComposite: true,
-      }
-    },
-    {
-      id: '4-2', source: '4', target: '2', animated: true, type: 'edge',
-      data: {
-        value: 12,
-        src: "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png",
-        alt: "token-image",
-        onClick: () => onOpenSideDrawer(),
-      }
-    },
-    {
-      id: '5-2', source: '5', target: '2', animated: true, type: 'edge',
-      data: {
-        value: 12,
-        src: "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png",
-        alt: "token-image",
-        onClick: () => onOpenSideDrawer(),
-      }
-    },
-    {
-      id: '6-2', source: '6', target: '2', animated: true, type: 'edge',
-      data: {
-        value: 12, src: "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png",
-        alt: "token-image",
-        onClick: () => onOpenSideDrawer(),
-      }
-    },
-    {
-      id: '2-7', source: '2', target: '7', animated: true, type: 'edge',
-      data: {
-        value: 12,
-        src: "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png",
-        alt: "token-image",
-        onClick: () => onOpenSideDrawer(),
-      }
-    },
-    {
-      id: '2-8', source: '2', target: '8', animated: true, type: 'edge',
-      data: {
-        value: 12,
-        src: "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png",
-        alt: "token-image",
-        onClick: () => onOpenSideDrawer(),
-      }
-    },
-    {
-      id: '2-9', source: '2', target: '9', animated: true, type: 'edge',
-      data: {
-        value: 12,
-        src: "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png",
-        alt: "token-image",
-        onClick: () => onOpenSideDrawer(),
-      }
-    },
-  ];
-
   const exchanges = [
     {
       src: "https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png?1621471875",
@@ -282,6 +108,12 @@ const App = () => {
       src: "https://assets.coingecko.com/markets/images/812/small/YtFwQwJr_400x400.jpg?1646056092",
       alt: "bingx-image",
       name: "Bingx",
+      type: "Exchange"
+    },
+    {
+      src: "https://assets.coingecko.com/markets/images/469/small/Binance.png?1568875842",
+      alt: "binacne-image",
+      name: "Binance",
       type: "Exchange"
     },
   ]
@@ -427,9 +259,13 @@ const App = () => {
       type: "Token"
     },
   ]
+  const [instance, setInstance] = useState(null)
+  const onInit = (i) => {
+    setInstance(i)
+  }
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const [filterExchange, setFilterExchange] = useState("binance")
   const [filterToken, setFilterToken] = useState("btc")
@@ -442,8 +278,24 @@ const App = () => {
       return exchange.name === value
     })
 
+    if (n.length === 0) {
+      setNodes([{
+        id: '1',
+        type: 'default',
+        data: {
+          label: (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+              <img src={e[0].src} alt="logo" />
+            </div>
+          ),
+        },
+        position: { x: 0, y: 0 },
+      }])
+      return
+    }
+
     n.map((node) => {
-      if (node.id === '2') {
+      if (node.id === '1') {
         node.data = {
           ...node.data,
           label: (
@@ -459,11 +311,304 @@ const App = () => {
 
     setNodes(n)
   }
+  const addNewNode = (label, address, isComposite, isInput, value, src, alt) => {
+    if (isInput) {
+      if (isInputRightTurn) {
+        let y = calculateYCoordinate(inputXRight)
+        let id = (inputXRight - startInputXRight) / range + 2
+        let newNode = {
+          id: `${id}`,
+          type: 'node',
+          data: {
+            label: label,
+            onClick: () => onOpenSideDrawer(),
+            address: address,
+            isComposite: isComposite,
+            isInput: isInput,
+          },
+          position: { x: inputXRight, y: y },
+        }
+        let newEdge = {
+          id: `${id}-1`, source: `${id}`, target: '1', animated: true, type: 'edge',
+          data: {
+            value: value,
+            src: src,
+            alt: alt,
+            onClick: () => onOpenSideDrawer(),
+            isComposite: isComposite,
+          }
+        }
+        inputXRight += range
+        isInputRightTurn = !isInputRightTurn
+
+        return { newNode, newEdge }
+      }
+
+      let y = calculateYCoordinate(inputXLeft)
+      let id = (startInputXLeft - inputXLeft) / range + 7
+      let newNode = {
+        id: `${id}`,
+        type: 'node',
+        data: {
+          label: label,
+          onClick: () => onOpenSideDrawer(),
+          address: address,
+          isComposite: isComposite,
+          isInput: isInput,
+        },
+        position: { x: inputXLeft, y: y },
+      }
+      let newEdge = {
+        id: `${id}-1`, source: `${id}`, target: '1', animated: true, type: 'edge',
+        data: {
+          value: value,
+          src: src,
+          alt: alt,
+          onClick: () => onOpenSideDrawer(),
+          isComposite: isComposite,
+        }
+      }
+      inputXLeft -= range
+      isInputRightTurn = !isInputRightTurn
+
+      return { newNode, newEdge }
+    }
+
+    if (isOutputLeftTurn) {
+      let y = calculateYCoordinate(outputXLeft)
+      let id = (startOutputXLeft - outputXLeft) / range + 12
+      let newNode = {
+        id: `${id}`,
+        type: 'node',
+        data: {
+          label: label,
+          onClick: () => onOpenSideDrawer(),
+          address: address,
+          isComposite: isComposite,
+          isInput: isInput,
+        },
+        position: { x: outputXLeft, y: -y },
+      }
+      let newEdge = {
+        id: `1-${id}`, source: '1', target: `${id}`, animated: true, type: 'edge',
+        data: {
+          value: value,
+          src: src,
+          alt: alt,
+          onClick: () => onOpenSideDrawer(),
+          isComposite: isComposite,
+        }
+      }
+      outputXLeft -= range
+      isOutputLeftTurn = !isOutputLeftTurn
+
+      return { newNode, newEdge }
+    }
+
+    let y = calculateYCoordinate(outputXRight)
+    let id = (outputXRight - startOutputXRight) / range + 17
+    let newNode = {
+      id: `${id}`,
+      type: 'node',
+      data: {
+        label: label,
+        onClick: () => onOpenSideDrawer(),
+        address: address,
+        isComposite: isComposite,
+        isInput: isInput,
+      },
+      position: { x: outputXRight, y: -y },
+    }
+    let newEdge = {
+      id: `1-${id}`, source: '1', target: `${id}`, animated: true, type: 'edge',
+      data: {
+        value: value,
+        src: src,
+        alt: alt,
+        onClick: () => onOpenSideDrawer(),
+        isComposite: isComposite,
+      }
+    }
+    outputXRight += range
+    isOutputLeftTurn = !isOutputLeftTurn
+
+    return { newNode, newEdge }
+  }
+  const data = [
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: true,
+      value: 50,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: true,
+      value: 100,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: true,
+      value: 1000,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: true,
+      value: 50,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: true,
+      value: 100,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: true,
+      value: 1000,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: true,
+      value: 50,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: true,
+      value: 100,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: true,
+      value: 1000,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: false,
+      value: 10,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: false,
+      value: 1,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: false,
+      value: 10,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: false,
+      value: 1,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: false,
+      value: 10,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: false,
+      isInput: false,
+      value: 1,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    },
+    {
+      label: '0xBe807D...',
+      address: '0xBe807Dddb074639cD9fA61b47676c064fc50D62C',
+      isComposite: true,
+      isInput: true,
+      value: 5000,
+      src: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579',
+      alt: 'btc-image',
+    }
+  ]
+  const addNewNodes = (data) => {
+    let newNodes = []
+    let newEdges = []
+    for (let i = 0; i < data.length; i++) {
+      let d = data[i]
+      let { newNode, newEdge } = addNewNode(d.label, d.address, d.isComposite, d.isInput, d.value, d.src, d.alt)
+      newNodes.push(newNode)
+      newEdges.push(newEdge)
+    }
+
+
+    setNodes([...nodes, ...newNodes])
+    setEdges([...nodes, ...newEdges])
+    let i = instance
+    i.zoomTo(0.75)
+    setInstance(i)
+  }
+  const callAPI = () => {
+    if (!filterStartTime || !filterEndTime) {
+      return
+    }
+
+    addNewNodes(data)
+  }
 
   return (
     <div>
       <div style={{ right: '20px', top: '20px', zIndex: '2', position: 'absolute' }}>
-        <DateTimePicker setFilterStartTime={setFilterStartTime} setFilterEndTime={setFilterEndTime} />
+        <DateTimePicker setFilterStartTime={setFilterStartTime} setFilterEndTime={setFilterEndTime} onChange={callAPI} />
       </div>
       <div style={{ right: '650px', top: '20px', zIndex: '2', position: 'absolute' }}>
         <Select data={exchanges} setFilterExchange={setFilterExchange} onChange={handleChangeExchange} />
@@ -498,7 +643,7 @@ const App = () => {
             <Empty description={false} />
           </div>
       }
-    </div>
+    </div >
   );
 };
 

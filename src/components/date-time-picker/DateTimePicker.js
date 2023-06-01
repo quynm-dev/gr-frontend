@@ -34,18 +34,21 @@ const timePresets = [
   },
 ];
 
-const DateTimePicker = ({ set }) => (
-  <Space direction="vertical" size={12}>
-    <RangePicker
-      disabledDate={disabledDate}
-      status="warning"
-      showTime={{
-        hideDisabledOptions: true,
-        defaultValue: [dayjs('00:00', 'HH:mm'), dayjs('11:59', 'HH:mm')],
-      }}
-      format="HH:mm DD-MM-YYYY"
-      presets={timePresets}
-    />
-  </Space>
-);
+const DateTimePicker = ({ setFilterStartTime, setFilterEndTime, onChange }) => {
+  return (
+    <Space direction="vertical" size={12}>
+      <RangePicker
+        disabledDate={disabledDate}
+        status="warning"
+        showTime={{
+          hideDisabledOptions: true,
+          defaultValue: [dayjs('00:00', 'HH:mm'), dayjs('11:59', 'HH:mm')],
+        }}
+        format="HH:mm DD-MM-YYYY"
+        presets={timePresets}
+        onChange={onChange}
+      />
+    </Space>
+  )
+};
 export default DateTimePicker;
