@@ -580,7 +580,7 @@ const App = () => {
       alt: 'btc-image',
     }
   ]
-  const addNewNodes = (data) => {
+  const addNewNodes = async (data) => {
     let newNodes = []
     let newEdges = []
     for (let i = 0; i < data.length; i++) {
@@ -591,18 +591,39 @@ const App = () => {
     }
 
 
+    setEdges([...edges, ...newEdges])
     setNodes([...nodes, ...newNodes])
-    setEdges([...nodes, ...newEdges])
     let i = instance
     i.zoomTo(0.75)
     setInstance(i)
+
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    for (let u = 0; u < newNodes.length; u++) {
+      let newNode = newNodes[u]
+
+      newNode.style = { ...newNode.style, opacity: 0, transitionDuration: '1s' }
+    }
+    setNodes([...nodes, ...newNodes])
+
+    await new Promise((resolve) => setTimeout(resolve, 500))
+    setEdges([...edges])
+    setNodes([...nodes])
   }
-  const callAPI = () => {
+  const callAPI = async () => {
     if (!filterStartTime || !filterEndTime) {
       return
     }
 
-    addNewNodes(data)
+    for (let i = 0; i < 2; i++) {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await addNewNodes(data)
+      isInputRightTurn = true
+      isOutputLeftTurn = true
+      inputXRight = startInputXRight
+      inputXLeft = startInputXLeft
+      outputXRight = startOutputXRight
+      outputXLeft = startOutputXLeft
+    }
   }
 
   return (

@@ -34,7 +34,7 @@ const Edge = ({
             position: 'absolute',
             fontSize: '10px',
             transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-            pointerEvents: "all"
+            pointerEvents: "all",
           }}
           className="nodrag nopan"
           onClick={data.onClick}
