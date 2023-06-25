@@ -34,7 +34,7 @@ const timePresets = [
   },
 ];
 
-const DateTimePicker = ({ setFilterStartTime, setFilterEndTime, onChange }) => {
+const DateTimePicker = ({ onChange }) => {
   return (
     <Space direction="vertical" size={12}>
       <RangePicker

@@ -1,13 +1,13 @@
 import { Badge, Space, Card } from 'antd';
 
 const Transaction = ({ transaction, wallet }) => {
-  const isBuy = wallet.address === transaction.from
+  const isBuy = wallet.address === transaction.from_address
   const attributes = {
     ...(isBuy ? { text: 'Buy', color: 'green' } : { text: 'Sell', color: 'red' }),
   }
 
   return (
-    < div onClick={() => window.open(transaction.scanURL, '_blank')} style={{ cursor: 'pointer' }}>
+    < div onClick={() => window.open(transaction.scanUrl, '_blank')} style={{ cursor: 'pointer' }}>
       <Space direction="vertical" size="middle" style={{ width: '100%' }} className="transaction">
         <Badge.Ribbon {...attributes}>
           <Card size="small">
@@ -20,8 +20,8 @@ const Transaction = ({ transaction, wallet }) => {
                 marginRight: '10px'
               }}>
                 <img
-                  src={transaction.src}
-                  alt={transaction.alt}
+                  src={transaction.image}
+                  alt={transaction.transaction_hash}
                   style={{ objectFit: 'cover' }}
                 />
               </div>

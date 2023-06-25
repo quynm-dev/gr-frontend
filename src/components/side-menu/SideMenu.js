@@ -21,11 +21,34 @@ const items = [
   getItem('Analysis', '2', <PartitionOutlined />),
   getItem('Price', '3', <DollarOutlined />),
 ];
+const getSelectedKeys = () => {
+  let currentURL = window.location.href
+  if (currentURL.indexOf("analysis") !== -1) {
+    return ['2']
+  }
+  if (currentURL.indexOf("usd-rate") !== -1) {
+    return ['3']
+  }
+  return ['1']
+}
 const SideMenu = () => {
   const [collapsed, setCollapsed] = useState(true);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
+  const handleClick = ({ key }) => {
+    switch (key) {
+      case '2':
+        window.location.href = 'http://localhost:3000/analysis'
+        break
+      case '3':
+        window.location.href = 'http://localhost:3000/usd-rate'
+        break
+      default:
+        window.location.href = 'http://localhost:3000'
+        break
+    }
+  }
   return (
     <div
       style={{
@@ -42,13 +65,13 @@ const SideMenu = () => {
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
       <Menu
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
         mode="inline"
         theme="dark"
         inlineCollapsed={collapsed}
         items={items}
         style={{ borderRadius: '10px' }}
+        onClick={handleClick}
+        selectedKeys={getSelectedKeys()}
       />
     </div>
   );

@@ -24,7 +24,7 @@ const SideDrawerSelect = ({ tokens }) => {
             <Option value={token.symbol} label={token.symbol}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div style={{ width: '30px', display: 'flex', alignItems: 'center', marginRight: '10px' }}>
-                  <img src={token.src} alt={token.alt} style={{ objectFit: 'cover', width: '100%' }} />
+                  <img src={token.image} alt={token.symbol} style={{ objectFit: 'cover', width: '100%' }} />
                 </div>
                 <div>
                   {token.symbol}
