@@ -4,12 +4,18 @@ const { Option } = Select;
 
 const maxNameLength = 30
 
-const S = ({ data, onChange, type }) => {
+const S = ({ data, onChange, type, width, maxSymbolLength }) => {
   const shortenName = (name) => {
     if (name.length > maxNameLength) {
       return name.slice(0, maxNameLength) + "..."
     }
     return name
+  }
+  const shortenSymbol = (symbol) => {
+    if (symbol.length > maxSymbolLength) {
+      return symbol.slice(0, maxSymbolLength) + "..."
+    }
+    return symbol
   }
 
   const [arrow,] = useState('Show');
@@ -33,7 +39,7 @@ const S = ({ data, onChange, type }) => {
       placeholder={type}
       optionLabelProp="label"
       status="warning"
-      style={{ width: '300px' }}
+      style={{ width: width + 'px' }}
       filterOption={(input, option) =>
         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
       }
@@ -56,7 +62,9 @@ const S = ({ data, onChange, type }) => {
                       <img src={item.image} alt={item.name} style={{ objectFit: 'cover', width: '100%' }} />
                     </div>
                     <div>
-                      {shortenName(item.name)}
+                      {/* {shortenName(item.name)}
+                       */}
+                      {type !== "Exchange" ? shortenSymbol(item.symbol) : shortenName(item.name)}
                     </div>
                   </div>
                 </Tooltip>

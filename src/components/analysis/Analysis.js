@@ -54,7 +54,7 @@ const Analysis = () => {
     setInstance(i)
   }
 
-  const [, setData] = useState([])
+  // const [, setData] = useState([])
   const [exchanges, setExchanges] = useState([])
   const [tokens, setTokens] = useState([])
   const [sideDrawerData, setSideDrawerData] = useState([])
@@ -274,15 +274,15 @@ const Analysis = () => {
   }
 
 
-  const callAPI = async () => {
-    if (!filterStartTime && !filterEndTime) {
-      setEdges([])
-      setNodes([nodes[0]])
-    }
-    if (!filterStartTime || !filterEndTime) {
-      return
-    }
-  }
+  // const callAPI = async () => {
+  //   if (!filterStartTime && !filterEndTime) {
+  //     setEdges([])
+  //     setNodes([nodes[0]])
+  //   }
+  //   if (!filterStartTime || !filterEndTime) {
+  //     return
+  //   }
+  // }
 
   useEffect(() => {
     const getData = async () => {
@@ -328,6 +328,7 @@ const Analysis = () => {
       getData()
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterStartTime, filterEndTime])
 
   return (
@@ -347,10 +348,10 @@ const Analysis = () => {
           <DateTimePicker onChange={handleDateTimeChange} />
         </div>
         <div style={{ right: '750px', top: '20px', zIndex: '2', position: 'absolute' }}>
-          <Select data={exchanges} onChange={handleChangeExchange} type="Exchange" />
+          <Select data={exchanges} onChange={handleChangeExchange} type="Exchange" width={300} maxSymbolLength={30} />
         </div>
         <div style={{ right: '400px', top: '20px', zIndex: '2', position: 'absolute' }}>
-          <Select data={tokens} type="Token" />
+          <Select data={tokens} type="Token" width={300} maxSymbolLength={30} />
         </div>
         <div style={{ left: '20px', top: '20px', zIndex: '2', position: 'absolute' }}>
           <SideMenu />
