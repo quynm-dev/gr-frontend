@@ -7,7 +7,7 @@ const Transaction = ({ transaction, wallet }) => {
   }
 
   return (
-    < div onClick={() => window.open(transaction.scanUrl, '_blank')} style={{ cursor: 'pointer' }}>
+    < div onClick={() => window.open(transaction.scan_url, '_blank')} style={{ cursor: 'pointer' }}>
       <Space direction="vertical" size="middle" style={{ width: '100%' }} className="transaction">
         <Badge.Ribbon {...attributes}>
           <Card size="small">
@@ -22,7 +22,7 @@ const Transaction = ({ transaction, wallet }) => {
                 <img
                   src={transaction.image}
                   alt={transaction.transaction_hash}
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: 'cover', width: '100%' }}
                 />
               </div>
               <div>{isBuy ? "+" : "-"}{transaction.value}</div>

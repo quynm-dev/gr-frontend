@@ -6,7 +6,7 @@ const Wallet = ({ wallet }) => {
     <div>
       <Divider plain>
         <Button size="medium">
-          <a href={wallet.scanURL} target="_blank" rel="noreferrer">{wallet.address}</a>
+          <a href={wallet.scan_url} target="_blank" rel="noreferrer">{wallet.address}</a>
         </Button>
       </Divider>
       <div>
@@ -16,7 +16,7 @@ const Wallet = ({ wallet }) => {
       <div>
         <h5>Related Transactions</h5>
         {
-          wallet.transactions.slice(1).map((transaction) => {
+          wallet.transactions.slice(1)?.map((transaction) => {
             return (
               <Transaction transaction={transaction} wallet={wallet} />
             )

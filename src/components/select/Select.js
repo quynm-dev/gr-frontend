@@ -32,6 +32,7 @@ const S = ({ data, onChange, type, width, maxSymbolLength }) => {
       pointAtCenter: true,
     };
   }, [arrow]);
+  const renderField = type === 'Exchange' ? 'name' : 'symbol'
 
   return (
     <Select
@@ -50,7 +51,7 @@ const S = ({ data, onChange, type, width, maxSymbolLength }) => {
         data.length !== 0 ?
           data.map((item) => {
             return (
-              <Option value={item.name} label={item.name} key={item.name}>
+              <Option value={item[renderField]} label={item[renderField]} key={item[renderField]}>
                 <Tooltip placement="rightTop" title={item.name} arrow={mergedArrow}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div style={{
@@ -59,11 +60,9 @@ const S = ({ data, onChange, type, width, maxSymbolLength }) => {
                       alignItems: 'center',
                       marginRight: '10px'
                     }}>
-                      <img src={item.image} alt={item.name} style={{ objectFit: 'cover', width: '100%' }} />
+                      <img src={item.image} alt={item[renderField]} style={{ objectFit: 'cover', width: '100%' }} />
                     </div>
                     <div>
-                      {/* {shortenName(item.name)}
-                       */}
                       {type !== "Exchange" ? shortenSymbol(item.symbol) : shortenName(item.name)}
                     </div>
                   </div>
