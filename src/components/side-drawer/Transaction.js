@@ -1,4 +1,5 @@
 import { Badge, Space, Card } from 'antd';
+import { DollarOutlined } from '@ant-design/icons'
 
 const Transaction = ({ transaction, wallet }) => {
   const isBuy = wallet.address === transaction.from_address
@@ -15,7 +16,7 @@ const Transaction = ({ transaction, wallet }) => {
               <div style={{
                 width: '30px',
                 display: 'flex',
-                justifyContent: 'center',
+                // justifyContent: 'center',
                 alignItems: 'center',
                 marginRight: '10px'
               }}>
@@ -25,7 +26,13 @@ const Transaction = ({ transaction, wallet }) => {
                   style={{ objectFit: 'cover', width: '100%' }}
                 />
               </div>
-              <div>{isBuy ? "+" : "-"}{transaction.value}</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', width: '85%' }}>
+                <div>{isBuy ? "+" : "-"}{transaction.value}</div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ padding: '0 5px' }}>{transaction.price}</div>
+                  <div><DollarOutlined /></div>
+                </div>
+              </div>
             </div>
           </Card>
         </Badge.Ribbon>

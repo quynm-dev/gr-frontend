@@ -1,12 +1,12 @@
 import { Card, Divider } from 'antd';
-import { FireOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
 
-const Top5 = ({ data }) => {
+const Top5 = ({ data, title, icon }) => {
   const Title = () => {
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <div style={{ padding: '0 5px 0 0' }}><FireOutlined style={{ color: 'red' }} /></div>
-        <div style={{ padding: '0 0 0 5px' }}>Trending</div>
+        <div style={{ padding: '0 5px 0 0' }}>{icon}</div>
+        <div style={{ padding: '0 0 0 5px' }}>{title}</div>
       </div>
     )
   }
