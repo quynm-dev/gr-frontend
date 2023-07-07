@@ -29,7 +29,7 @@ const DashBoard = () => {
     setExchange(value)
   }
   const attributes = {
-    ...(exchange ? { height: '100%', backgroundColor: 'rgb(240, 242, 245)' } : { height: '100vh', backgroundColor: 'rgb(240, 242, 245)' }),
+    ...(exchange && startTime && endTime ? { height: '100%', backgroundColor: 'rgb(240, 242, 245)' } : { height: '100vh', backgroundColor: 'rgb(240, 242, 245)' }),
   }
 
   useEffect(() => {
@@ -92,19 +92,16 @@ const DashBoard = () => {
       </div>
       <div>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', width: '90%', margin: 'auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '30%', padding: '0 20px 50px 0' }}>
-            <Top5 data={top5Price} icon={<SlidersOutlined style={{ color: 'orange' }} />} title={'Top 5 price'} />
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '30%', padding: '0 20px 50px 0' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '40%', padding: '0 20px 50px 0' }}>
             <Top5 data={top5BuyCount} icon={<RiseOutlined style={{ color: 'green' }} />} title={'Top 5 buy transaction'} />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '30%', padding: '0 20px 50px 0' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '40%', padding: '0 20px 50px 0' }}>
             <Top5 data={top5SellCount} icon={<FallOutlined style={{ color: 'red' }} />} title={'Top 5 sell transaction'} />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '30%', padding: '0 20px 50px 0' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '40%', padding: '0 20px 50px 0' }}>
             <Top5 data={top5BuyVolume} icon={<UpCircleOutlined style={{ color: 'green' }} />} title={'Top 5 buy volume'} />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '30%', padding: '0 20px 50px 0' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '40%', padding: '0 20px 50px 0' }}>
             <Top5 data={top5SellVolume} icon={<DownCircleOutlined style={{ color: 'red' }} />} title={'Top 5 sell volume'} />
           </div>
         </div>

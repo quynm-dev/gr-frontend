@@ -64,8 +64,8 @@ const USDRate = () => {
   useEffect(() => {
     const getData = async () => {
       setLoading(true)
-      await axios.get("http://0.0.0.0:8096/tokens/").then((resp) => {
-        setTokens(resp.data.tokens)
+      await axios.get("http://0.0.0.0:8096/tokens/usd-rate").then((resp) => {
+        setTokens(resp.data.body)
       }).catch((err) => {
         console.log(err)
       })
@@ -136,29 +136,29 @@ const USDRate = () => {
       </div>
       <div style={{ textAlign: 'center', padding: '20px 0' }}>USD Rate</div>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Card title={<Title />} bordered={false} style={{ width: 500, position: 'relative', top: '100px' }}>
+        <Card title={<Title />} bordered={false} style={{ width: 700, position: 'relative', top: '100px' }}>
           <div style={{ position: 'relative' }}>
             {
               switching ?
                 <>
                   <div style={{ position: 'relative', margin: '10px 0px' }}>
-                    <Input style={{ padding: '20px' }} suffix={<DollarOutlined style={{ fontSize: '20px' }} />} value={usdValue} onChange={handleUSDValueChange} />
+                    <Input style={{ padding: '30px', fontSize: '50px' }} suffix={<DollarOutlined style={{ fontSize: '20px' }} />} value={usdValue} onChange={handleUSDValueChange} />
                   </div>
                 </>
                 :
                 <></>
             }
             <div style={{ position: 'relative', margin: '10px 0px' }}>
-              <Input style={{ padding: '20px' }} value={tokenValue} onChange={handleTokenValueChange} />
+              <Input style={{ padding: '30px', fontSize: '50px' }} value={tokenValue} onChange={handleTokenValueChange} />
               <div style={{ position: 'absolute', right: '15px', top: '15px' }}>
-                <Select data={tokens} type="Token" width={150} maxSymbolLength={5} value={filterToken} />
+                <Select data={tokens} type="Token" width={150} maxSymbolLength={5} value={filterToken} renderField={'symbol'} onChange={handleFilterToken} />
               </div>
             </div>
             {
               !switching ?
                 <>
                   <div style={{ position: 'relative', margin: '10px 0px' }}>
-                    <Input style={{ padding: '20px' }} suffix={<DollarOutlined style={{ fontSize: '20px' }} />} value={usdValue} onChange={handleUSDValueChange} />
+                    <Input style={{ padding: '30px', fontSize: '50px' }} suffix={<DollarOutlined style={{ fontSize: '40px' }} />} value={usdValue} onChange={handleUSDValueChange} />
                   </div>
                 </>
                 :
