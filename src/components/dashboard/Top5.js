@@ -1,7 +1,15 @@
 import { Card, Divider } from 'antd';
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons'
 
 const Top5 = ({ data, title, icon }) => {
+  const roundFloat = (floatNumber) => {
+    let roundedNumber = floatNumber.toFixed(10);
+
+    if (roundedNumber.length > 10) {
+      roundedNumber = roundedNumber.substring(0, 10);
+    }
+
+    return roundedNumber
+  }
   const Title = () => {
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -21,32 +29,23 @@ const Top5 = ({ data, title, icon }) => {
     >
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ width: '10%' }}>#</div>
-        <div style={{ width: '40%' }}>Name</div>
-        <div style={{ width: '40%' }}>Price</div>
-        <div style={{ width: '10%' }}>24h</div>
+        <div style={{ width: '60%' }}>Name</div>
+        <div style={{ width: '30%' }}>Price</div>
       </div>
       <Divider />
       {
-        data.map((token, index) => {
+        data?.map((token, index) => {
           return (
             <>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div style={{ width: '5%' }}>{index + 1}</div>
-                <div style={{ width: '40%', display: 'flex', alignItems: 'center' }}>
+                <div style={{ width: '10%' }}>{index + 1}</div>
+                <div style={{ width: '60%', display: 'flex', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', padding: '0 5px 0 0' }}>
                     <img src={token.image} alt={token.name} style={{ width: '30px' }} />
                   </div>
                   <div>{token.name}</div>
                 </div>
-                <div style={{ width: '40%' }}>{token.current_price}</div>
-                <div style={{ width: '15%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <div style={{ padding: '0 5px 0 0' }}>
-                    {token.price_change_24h > 0 ? <CaretUpOutlined style={{ color: 'green' }} /> : <CaretDownOutlined style={{ color: 'red' }} />}
-                  </div>
-                  <div>
-                    {token.price_change_24h.toFixed(5)}
-                  </div>
-                </div>
+                <div style={{ width: '30%' }}>{roundFloat(token.price)}</div>
               </div>
               <Divider />
             </>

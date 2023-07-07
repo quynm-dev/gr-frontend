@@ -368,10 +368,10 @@ const Analysis = () => {
           <DateTimePicker onChange={handleDateTimeChange} />
         </div>
         <div style={{ right: '750px', top: '20px', zIndex: '2', position: 'absolute' }}>
-          <Select data={exchanges} onChange={handleChangeExchange} type='Exchange' width={300} maxSymbolLength={30} />
+          <Select data={exchanges} onChange={handleChangeExchange} type='Exchange' width={300} maxSymbolLength={30} renderField={'name'} />
         </div>
         <div style={{ right: '400px', top: '20px', zIndex: '2', position: 'absolute' }}>
-          <Select data={tokens} type='Token' width={300} maxSymbolLength={30} onChange={handleChangeToken} />
+          <Select data={tokens} type='Token' width={300} maxSymbolLength={30} onChange={handleChangeToken} renderField={'symbol'} />
         </div>
         <div style={{ left: '20px', top: '20px', zIndex: '2', position: 'absolute' }}>
           <SideMenu />

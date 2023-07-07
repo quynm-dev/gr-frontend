@@ -4,7 +4,7 @@ const { Option } = Select;
 
 const maxNameLength = 30
 
-const S = ({ data, onChange, type, width, maxSymbolLength }) => {
+const S = ({ data, onChange, type, width, maxSymbolLength, renderField }) => {
   const shortenName = (name) => {
     if (name.length > maxNameLength) {
       return name.slice(0, maxNameLength) + "..."
@@ -32,7 +32,6 @@ const S = ({ data, onChange, type, width, maxSymbolLength }) => {
       pointAtCenter: true,
     };
   }, [arrow]);
-  const renderField = type === 'Exchange' ? 'name' : 'symbol'
 
   return (
     <Select
